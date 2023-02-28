@@ -11,20 +11,21 @@ public class Player : MonoBehaviour
     public event EventHandler<SelectedVisualCounterArgs> OnSelectedVisualCounterChanged;
     public class SelectedVisualCounterArgs: EventArgs
     {
-       public ClearCounter selectedCounter;
+       public BaseCounter selectedCounter;
     }
  
     private bool isWalking = false;
     private Vector3 lastInteractionDir;
-    private ClearCounter selectedCounter;
+    private BaseCounter selectedCounter;
+    private PickItems playerPickedItem;
 
     [SerializeField] private float speed;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private LayerMask interactMask;
-    [SerializeField] private PickItems pickItem;
 
     private void Awake()
     {
+        playerPickedItem = GetComponentInChildren<PickItems>();
         if (Instance != null)
         {
             Debug.Log("Already exist instace of player");
@@ -45,7 +46,17 @@ public class Player : MonoBehaviour
 
     public void PickItem(KitchenObject item)
     {
-        pickItem.PickItem(item);
+        playerPickedItem.PickItem(item);
+    }
+
+    public void DropItem(IPickUp pickableObject)
+    {
+        playerPickedItem.DropItemTo(pickableObject);
+    }
+
+    public PickItems GetPlayerPickedItem()
+    {
+        return playerPickedItem;
     }
 
     private void GameInput_OnInteract(object sender, System.EventArgs e)
@@ -73,15 +84,15 @@ public class Player : MonoBehaviour
             lastInteractionDir = moveDir;
         }
 
-        bool isInteracting = Physics.Raycast(transform.position, lastInteractionDir, out RaycastHit hit, interactionDistance);
+        bool isInteracting = Physics.Raycast(transform.position, lastInteractionDir, out RaycastHit hit, interactionDistance, interactMask);
 
         if (isInteracting)
         {
-            bool hasClearCounter = hit.transform.TryGetComponent<ClearCounter>(out ClearCounter clearCounter);
+            bool hasClearCounter = hit.transform.TryGetComponent(out BaseCounter counter);
             
             if (hasClearCounter)
             {
-                SetSelectedCounter(clearCounter);
+                SetSelectedCounter(counter);
             } else
             {
                 SetSelectedCounter(null);
@@ -134,7 +145,7 @@ public class Player : MonoBehaviour
     } 
     
 
-    private void SetSelectedCounter(ClearCounter selectedCounter)
+    private void SetSelectedCounter(BaseCounter selectedCounter)
     {
         this.selectedCounter = selectedCounter;
         OnSelectedVisualCounterChanged?.Invoke(this, new SelectedVisualCounterArgs {

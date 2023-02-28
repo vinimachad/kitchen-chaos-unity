@@ -2,22 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PickItems : MonoBehaviour, IPickUp
+public class PickItems : MonoBehaviour, IPickUp, IDropable
 {
 
     public KitchenObject Item { get; set; }
 
     public void PickItem(KitchenObject item)
     {
-        if (this.Item != null)
-        {
-            Debug.LogError("Already exists item with player");
-            return;
-        }
+        if (this.Item != null) return;
 
         item.SetPickedPlace(this);
     }
 
+    public void DropItemTo(IPickUp pickableObject)
+    {
+        Item.SetPickedPlace(pickableObject);
+    }
 
     public void ClearItem()
     {

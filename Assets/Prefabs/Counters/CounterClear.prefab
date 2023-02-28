@@ -182,8 +182,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 87817fa92e0909143a12c1abfab8a85b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  clearCounter: {fileID: 4098845622400852531}
-  visualSelectedClearCounter: {fileID: 1585103342546121780}
+  visualsSelectedClearCounter:
+  - {fileID: 1585103342546121780}
 --- !u!1001 &8255645403046272627
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -194,7 +194,7 @@ PrefabInstance:
     - target: {fileID: 4058333308872527573, guid: a565f33ba4134ad46a64e7f7142c460b,
         type: 3}
       propertyPath: m_Name
-      value: ClearCounter
+      value: CounterClear
       objectReference: {fileID: 0}
     - target: {fileID: 6180330772294048902, guid: a565f33ba4134ad46a64e7f7142c460b,
         type: 3}
@@ -283,6 +283,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 765823a3c23deab4aafb1819bfb652ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  kitchenObjectSO: {fileID: 11400000, guid: edf456431af37b4418dbf51707edf761, type: 2}
   counterTopPoint: {fileID: 1667875047110770957}
-  otherCounter: {fileID: 0}

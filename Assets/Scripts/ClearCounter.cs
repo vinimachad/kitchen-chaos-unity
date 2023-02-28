@@ -2,84 +2,41 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClearCounter: MonoBehaviour, IPickUp
+public class ClearCounter: BaseCounter
 {
 
-    [SerializeField] private KitchenSO kitchenObjectSO;
-    [SerializeField] private Transform counterTopPoint;
-    [SerializeField] private ClearCounter otherCounter;
-    
-    //private KitchenObject kitchenObject;
+    private Player player;
+    private bool playerHasItem;
 
-    public KitchenObject Item { get; set; }
-
-    private void Update()
+    public override void Interact(Player player)
     {
-        if (Input.GetKeyDown(KeyCode.T) && Item != null)
-        {
-            Item.SetPickedPlace(otherCounter);
-        }
+
+        this.player = player;
+        PickItems playerItem = player.GetPlayerPickedItem();
+        playerHasItem = playerItem.HasItem();
+
+        if (HasItem())
+            PassItemToPlayer();
+        else
+            GrabbItemFromPlayer();
     }
 
-    public void Interact(Player player)
+    private void GrabbItemFromPlayer()
     {
-        if (Item == null)
-        {
-            Transform kitchenObjcTransform = Instantiate(kitchenObjectSO.prefab, counterTopPoint);
-            kitchenObjcTransform.GetComponent<KitchenObject>().SetPickedPlace(this);
-        } else
-        {
+        if (playerHasItem)
+            player.DropItem(this);
+    }
+
+    private void PassItemToPlayer()
+    {
+        if (playerHasItem) return;
+        else
             player.PickItem(Item);
-        }
     }
 
-    public Transform GetPositionPoint()
+    public override void SetItem(KitchenObject item)
     {
-        return counterTopPoint;
+        base.SetItem(item);
+
     }
-
-    public void SetItem(KitchenObject item)
-    {
-        this.Item = item;
-    }
-
-    public KitchenObject GetItem()
-    {
-        return this.Item;
-    }
-
-    public bool HasItem()
-    {
-        return this.Item != null;
-    }
-
-    public void ClearItem()
-    {
-        this.Item = null;
-    }
-
-    //public Transform GetCounterTopPoint()
-    //{
-    //    return counterTopPoint;
-    //}
-
-    //public void SetKitchenObject(KitchenObject kitchenObject)
-    //{
-    //    this.kitchenObject = kitchenObject;
-    //}
-
-    //public KitchenObject GetKitchenObject()
-    //{
-    //    return kitchenObject;
-    //}
-
-    //public bool HasKitchenObject()
-    //{
-    //    return kitchenObject != null;
-    //}
-
-    //public void ClearKitchenObject()
-    //{
-    //    kitchenObject = null;
-    //}
 }

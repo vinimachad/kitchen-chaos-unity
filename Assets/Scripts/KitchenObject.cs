@@ -33,6 +33,11 @@ public class KitchenObject : MonoBehaviour
         transform.localPosition = Vector3.zero;
     }
 
+    public void ClearItem()
+    {
+        pickUp = null;
+    }
+
     public IPickUp GetPlace()
     {
         return pickUp;
