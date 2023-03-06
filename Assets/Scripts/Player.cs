@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private LayerMask interactMask;
-
+    
     private void Awake()
     {
         playerPickedItem = GetComponentInChildren<PickItems>();

@@ -8,7 +8,7 @@ public class BaseCounter : MonoBehaviour, IPickUp
 
     [SerializeField] protected Transform counterTopPoint;
 
-    public KitchenObject Item { get; set; } 
+    public KitchenObject Item { get; set; }
     public virtual void Interact(Player player)
     {
         Debug.Log("Interact");
