@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,11 +8,15 @@ public class BaseCounter : MonoBehaviour, IPickUp
 
     [SerializeField] protected Transform counterTopPoint;
 
-    public KitchenObject Item { get; set; }
-
+    public KitchenObject Item { get; set; } 
     public virtual void Interact(Player player)
     {
         Debug.Log("Interact");
+    }
+
+    public virtual void UtilitiesInteract(Player player, bool isHolding)
+    {
+        Debug.Log("Utilities Interact");
     }
 
     public virtual Transform GetPositionPoint()

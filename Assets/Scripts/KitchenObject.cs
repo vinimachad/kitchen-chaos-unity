@@ -9,7 +9,7 @@ public class KitchenObject : MonoBehaviour
 
     private IPickUp pickUp;
 
-    public KitchenSO GetKitchenObjectName()
+    public KitchenSO GetKitchenObjectSO()
     {
         return kitchenSO;
     }
@@ -22,10 +22,6 @@ public class KitchenObject : MonoBehaviour
         }
 
         this.pickUp = pickUp;
-
-        if (pickUp.HasItem()) {
-            Debug.LogError("Kitchen object already exists in clear counter");
-        }
 
         pickUp.SetItem(this);
 
@@ -41,5 +37,19 @@ public class KitchenObject : MonoBehaviour
     public IPickUp GetPlace()
     {
         return pickUp;
+    }
+
+    public void DestroyYourSelf()
+    {
+        Destroy(gameObject);
+        ClearItem();
+    }
+
+    static public KitchenObject InstantiateItemAndPassTo(Transform prefab, Transform counterTopPoint, IPickUp place)
+    {
+        Transform kitchenObjecTransform = Instantiate(prefab, counterTopPoint);
+        KitchenObject kitchenObject = kitchenObjecTransform.GetComponent<KitchenObject>();
+        kitchenObject.SetPickedPlace(place);
+        return kitchenObject;
     }
 }

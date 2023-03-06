@@ -37,6 +37,15 @@ public class Player : MonoBehaviour
     private void Start()
     {
         gameInput.OnInteract += GameInput_OnInteract;
+        gameInput.OnHoldingUtilitiesInteract += GameInput_OnUtilitiesInteract;
+    }
+
+    private void GameInput_OnUtilitiesInteract(object sender, bool isHolding)
+    {
+        if (selectedCounter != null)
+        {
+            selectedCounter.UtilitiesInteract(this, isHolding);
+        }
     }
 
     public bool CheckIsWalking()
@@ -115,7 +124,7 @@ public class Player : MonoBehaviour
         if (!canMove)
         {
             Vector3 moveDirX = new Vector3(moveDir.x, 0f, 0f).normalized;
-            canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up, .6f, moveDirX, moveSpeed);
+            canMove = moveDir.x != 0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up, .6f, moveDirX, moveSpeed);
 
             if (canMove)
             {
@@ -124,7 +133,7 @@ public class Player : MonoBehaviour
             {
 
                 Vector3 moveDirZ = new Vector3(0f, 0f, moveDir.z).normalized;
-                 canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up, .6f, moveDirZ, moveSpeed);
+                 canMove = moveDir.z != 0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up, .6f, moveDirZ, moveSpeed);
 
                 if (canMove)
                 {

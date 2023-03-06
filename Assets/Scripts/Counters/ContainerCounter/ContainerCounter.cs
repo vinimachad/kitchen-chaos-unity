@@ -13,10 +13,11 @@ public class ContainerCounter : BaseCounter
         bool playerHasItem = player.GetPlayerPickedItem().HasItem();
         if (playerHasItem) 
           return;
-
-        Transform kitchenObjecTransform = Instantiate(kitchenScriptableObject.prefab, counterTopPoint);
-        kitchenObjecTransform.GetComponent<KitchenObject>().SetPickedPlace(this);
-        player.PickItem(Item);
+        KitchenObject.InstantiateItemAndPassTo(
+            kitchenScriptableObject.prefab,
+            counterTopPoint,
+            player.GetPlayerPickedItem()
+        );
         OnGrabbItem?.Invoke(this, EventArgs.Empty);
     }
 }
