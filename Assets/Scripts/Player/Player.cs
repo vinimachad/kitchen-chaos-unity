@@ -9,11 +9,11 @@ public class Player : MonoBehaviour
     public static Player Instance { get; private set; }
 
     public event EventHandler<SelectedVisualCounterArgs> OnSelectedVisualCounterChanged;
-    public class SelectedVisualCounterArgs: EventArgs
+    public class SelectedVisualCounterArgs : EventArgs
     {
-       public BaseCounter selectedCounter;
+        public BaseCounter selectedCounter;
     }
- 
+
     private bool isWalking = false;
     private Vector3 lastInteractionDir;
     private BaseCounter selectedCounter;
@@ -22,7 +22,7 @@ public class Player : MonoBehaviour
     [SerializeField] private float speed;
     [SerializeField] private GameInput gameInput;
     [SerializeField] private LayerMask interactMask;
-    
+
     private void Awake()
     {
         playerPickedItem = GetComponentInChildren<PickItems>();
@@ -38,6 +38,15 @@ public class Player : MonoBehaviour
     {
         gameInput.OnInteract += GameInput_OnInteract;
         gameInput.OnHoldingUtilitiesInteract += GameInput_OnUtilitiesInteract;
+        gameInput.OnDropItem += GameInput_OnDropItem;
+    }
+
+    private void GameInput_OnDropItem(object sender, System.EventArgs e)
+    {
+        if (playerPickedItem.HasItem())
+        {
+
+        }
     }
 
     private void GameInput_OnUtilitiesInteract(object sender, bool isHolding)
@@ -58,7 +67,7 @@ public class Player : MonoBehaviour
         playerPickedItem.PickItem(item);
     }
 
-    public void DropItem(IPickUp pickableObject)
+    public void PlaceItemOn(IPickUp pickableObject)
     {
         playerPickedItem.DropItemTo(pickableObject);
     }
@@ -78,7 +87,6 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        HandleMovement();
         HandleInteraction();
     }
 
@@ -98,67 +106,31 @@ public class Player : MonoBehaviour
         if (isInteracting)
         {
             bool hasClearCounter = hit.transform.TryGetComponent(out BaseCounter counter);
-            
+
             if (hasClearCounter)
             {
                 SetSelectedCounter(counter);
-            } else
+            }
+            else
             {
                 SetSelectedCounter(null);
             }
 
-        } else
+        }
+        else
         {
             SetSelectedCounter(null);
         }
     }
 
-    private void HandleMovement()
-    {
-        float moveSpeed = speed * Time.deltaTime;
-        Vector2 input = gameInput.GetPlayerInputNormalized();
-        Vector3 moveDir = new(input.x, 0f, input.y);
-
-        bool canMove = !Physics.CapsuleCast(transform.position, transform.position + Vector3.up, .6f, moveDir, moveSpeed);
-
-        if (!canMove)
-        {
-            Vector3 moveDirX = new Vector3(moveDir.x, 0f, 0f).normalized;
-            canMove = moveDir.x != 0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up, .6f, moveDirX, moveSpeed);
-
-            if (canMove)
-            {
-                moveDir = moveDirX; 
-            } else
-            {
-
-                Vector3 moveDirZ = new Vector3(0f, 0f, moveDir.z).normalized;
-                 canMove = moveDir.z != 0 && !Physics.CapsuleCast(transform.position, transform.position + Vector3.up, .6f, moveDirZ, moveSpeed);
-
-                if (canMove)
-                {
-                    moveDir = moveDirZ;
-                }
-            }
-        }
-
-        if (canMove)
-        {
-            transform.position += moveDir * moveSpeed;
-        }
-
-        isWalking = moveDir != Vector3.zero;
-
-        float rotateSpeed = 15f;
-        transform.forward = Vector3.Slerp(transform.forward, moveDir, Time.deltaTime * rotateSpeed);
-    } 
-    
-
     private void SetSelectedCounter(BaseCounter selectedCounter)
     {
         this.selectedCounter = selectedCounter;
-        OnSelectedVisualCounterChanged?.Invoke(this, new SelectedVisualCounterArgs {
+        OnSelectedVisualCounterChanged?.Invoke(this, new SelectedVisualCounterArgs
+        {
             selectedCounter = selectedCounter
         });
     }
+
+
 }

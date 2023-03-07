@@ -9,6 +9,7 @@ public class KitchenObject : MonoBehaviour
 
     private IPickUp pickUp;
 
+    #region  CounterInteractionsRegion
     public KitchenSO GetKitchenObjectSO()
     {
         return kitchenSO;
@@ -52,4 +53,6 @@ public class KitchenObject : MonoBehaviour
         kitchenObject.SetPickedPlace(place);
         return kitchenObject;
     }
+
+    #endregion
 }

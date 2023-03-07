@@ -20,8 +20,8 @@ public class CuttingCounter : BaseCounter
         {
             if (HasItem()) return;
 
-            if(CheckIfCanCutItem(player.GetPlayerPickedItem().Item)) 
-                player.DropItem(this);
+            if (CheckIfCanCutItem(player.GetPlayerPickedItem().Item))
+                player.PlaceItemOn(this);
         }
         else
         {
@@ -45,49 +45,51 @@ public class CuttingCounter : BaseCounter
 
     #region Cut Logic Region
 
-        private bool CheckIfCanCutItem(KitchenObject item)
+    private bool CheckIfCanCutItem(KitchenObject item)
+    {
+        var recipe = GetCurrentRecipe(item);
+        if (recipe != null)
         {
-            var recipe = GetCurrentRecipe(item);
-            if (recipe != null)
-            {
-                return true;
-            }
-
-            return false;
+            return true;
         }
 
-        private void CheckIfCanSpawnCuttedItem(bool isHolding)
+        return false;
+    }
+
+    private void CheckIfCanSpawnCuttedItem(bool isHolding)
+    {
+        var recipe = GetCurrentRecipe(Item);
+        if (recipe && isHolding)
         {
-            var recipe = GetCurrentRecipe(Item);
-            if (recipe && isHolding)
-            {
 
-                StartCoroutine(WaitAndPrint(recipe, () => {
-                    Item.DestroyYourSelf();
-                    KitchenObject.InstantiateItemAndPassTo(recipe.output.prefab, counterTopPoint, this);
-                    OnHideProgressBar?.Invoke(this, EventArgs.Empty);
-                }));
-
-            } else
+            StartCoroutine(WaitAndPrint(recipe, () =>
             {
-                StopAllCoroutines();
-                cuttedTimes = 0;
+                Item.DestroyYourSelf();
+                KitchenObject.InstantiateItemAndPassTo(recipe.output.prefab, counterTopPoint, this);
                 OnHideProgressBar?.Invoke(this, EventArgs.Empty);
-            }
-        }
+            }));
 
-        private CuttingRecipesSO GetCurrentRecipe(KitchenObject item)
+        }
+        else
         {
-            foreach (var cuttingRecipe in cuttingRecipesSO)
-            {
-                if (cuttingRecipe.input == item.GetKitchenObjectSO())
-                {
-                    return cuttingRecipe;
-                }
-            }
-
-            return null;
+            StopAllCoroutines();
+            cuttedTimes = 0;
+            OnHideProgressBar?.Invoke(this, EventArgs.Empty);
         }
+    }
+
+    private CuttingRecipesSO GetCurrentRecipe(KitchenObject item)
+    {
+        foreach (var cuttingRecipe in cuttingRecipesSO)
+        {
+            if (cuttingRecipe.input == item.GetKitchenObjectSO())
+            {
+                return cuttingRecipe;
+            }
+        }
+
+        return null;
+    }
     #endregion
 
 

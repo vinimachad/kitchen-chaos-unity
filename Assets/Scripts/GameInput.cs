@@ -5,6 +5,8 @@ using UnityEngine;
 
 public class GameInput : MonoBehaviour
 {
+
+    public event EventHandler OnDropItem;
     public event EventHandler OnInteract;
     public event EventHandler<bool> OnHoldingUtilitiesInteract;
     private PlayerInput playerInput;
@@ -16,6 +18,12 @@ public class GameInput : MonoBehaviour
         playerInput.Player.Interact.performed += Interact_performed;
         playerInput.Player.UtilitiesInteract.performed += UtilitiesInteract_performed;
         playerInput.Player.UtilitiesInteract.canceled += UtilitiesInteract_canceled;
+        playerInput.Player.DropItem.performed += DropItem_performed;
+    }
+
+    private void DropItem_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
+    {
+        OnDropItem?.Invoke(this, EventArgs.Empty);
     }
 
     private void UtilitiesInteract_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)

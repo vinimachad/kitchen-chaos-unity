@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ClearCounter: BaseCounter
+public class ClearCounter : BaseCounter
 {
 
     private Player player;
@@ -24,7 +24,7 @@ public class ClearCounter: BaseCounter
     private void GrabbItemFromPlayer()
     {
         if (playerHasItem)
-            player.DropItem(this);
+            player.PlaceItemOn(this);
     }
 
     private void PassItemToPlayer()
