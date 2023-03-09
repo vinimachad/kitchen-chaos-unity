@@ -8,9 +8,9 @@ public class PlayerMovement : MonoBehaviour
 
     private CharacterController characterController;
     private Vector2 input;
-    [SerializeField] private float speed;
+    [SerializeField] private float speed = 7;
     [SerializeField] private float gravity = -2;
-    [SerializeField] private float rotateSpeed = 1800f;
+    [SerializeField] private float rotateSpeed = 15f;
     [SerializeField] private GameInput gameInput;
 
     private void Start()
