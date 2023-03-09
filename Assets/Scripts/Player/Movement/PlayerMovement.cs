@@ -26,13 +26,4 @@ public class PlayerMovement : MonoBehaviour
 
         transform.forward = Vector3.Slerp(transform.forward, new(input.x, 0f, input.y), Time.deltaTime * rotateSpeed);
     }
-
-    private void OnDrawGizmos()
-    {
-        if (input != null)
-        {
-            Vector3 endDir = new Vector3(input.x, 0f, input.y);
-            BetterGizmos.Linecast(Color.blue, Color.red, 1f, transform.forward, endDir);
-        }
-    }
 }

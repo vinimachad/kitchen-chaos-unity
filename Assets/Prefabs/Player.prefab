@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 1422229833692097457}
   - component: {fileID: 8275617632650641821}
   - component: {fileID: 3073883020666165227}
+  - component: {fileID: 7466922895289962816}
+  - component: {fileID: 8926231103548900435}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -71,6 +73,7 @@ MonoBehaviour:
   interactMask:
     serializedVersion: 2
     m_Bits: 8
+  droppedItemsTransform: {fileID: 0}
 --- !u!114 &3073883020666165227
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -83,8 +86,35 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d63e1c598bf95943aef822d9b533024, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  characterController: {fileID: 0}
+  speed: 0
+  gravity: -2
+  rotateSpeed: 1800
   gameInput: {fileID: 0}
+--- !u!114 &7466922895289962816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8275617632650641820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6e6a2e776b2833741b909afefba9a285, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  magnitudeForce: 1
+--- !u!114 &8926231103548900435
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8275617632650641820}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4f69ea4f42917e345a7eef57979e9bac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8275617632714451922
 GameObject:
   m_ObjectHideFlags: 0

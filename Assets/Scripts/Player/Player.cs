@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using MiniTools.BetterGizmos;
 
 public class Player : MonoBehaviour
 {
@@ -11,12 +12,12 @@ public class Player : MonoBehaviour
     public event EventHandler<SelectedVisualCounterArgs> OnSelectedVisualCounterChanged;
     public class SelectedVisualCounterArgs : EventArgs
     {
-        public BaseCounter selectedCounter;
+        public ISelectable selectedCounter;
     }
 
     private bool isWalking = false;
     private Vector3 lastInteractionDir;
-    private BaseCounter selectedCounter;
+    private ISelectable selectedCounter;
     private PickItems playerPickedItem;
 
     [SerializeField] private float speed;
@@ -45,7 +46,7 @@ public class Player : MonoBehaviour
     {
         if (playerPickedItem.HasItem())
         {
-
+            DroppableKitchenObject.SpawnDroppableKitchenObjectInPos(playerPickedItem.transform, playerPickedItem.GetItem());
         }
     }
 
@@ -87,43 +88,46 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        HandleInteraction();
+        HandlerInteraction();
     }
 
-    private void HandleInteraction()
+    private void HandlerInteraction()
     {
-        Vector2 input = gameInput.GetPlayerInputNormalized();
-        Vector3 moveDir = new(input.x, 0f, input.y);
-        float interactionDistance = 2f;
+        Collider[] colliders = Physics.OverlapSphere(transform.position, 2f, interactMask);
+        float? lowerValue = null;
+        Collider selectedCollider = null;
 
-        if (moveDir != Vector3.zero)
-        {
-            lastInteractionDir = moveDir;
-        }
-
-        bool isInteracting = Physics.Raycast(transform.position, lastInteractionDir, out RaycastHit hit, interactionDistance, interactMask);
-
-        if (isInteracting)
-        {
-            bool hasClearCounter = hit.transform.TryGetComponent(out BaseCounter counter);
-
-            if (hasClearCounter)
-            {
-                SetSelectedCounter(counter);
-            }
-            else
-            {
-                SetSelectedCounter(null);
-            }
-
-        }
-        else
+        if (colliders.Length == 0)
         {
             SetSelectedCounter(null);
         }
+
+        foreach (var collider in colliders)
+        {
+            if (lowerValue == null)
+            {
+                lowerValue = Vector3.Distance(transform.position, collider.transform.position);
+                selectedCollider = collider;
+            }
+            else
+            {
+                if (lowerValue > Vector3.Distance(transform.position, collider.transform.position))
+                {
+                    lowerValue = Vector3.Distance(transform.position, collider.transform.position);
+                    selectedCollider = collider;
+                }
+            }
+        }
+
+        if (selectedCollider != null)
+        {
+            var selected = selectedCollider.transform.GetComponent<ISelectable>();
+            SetSelectedCounter(selected);
+            this.selectedCounter = selected;
+        }
     }
 
-    private void SetSelectedCounter(BaseCounter selectedCounter)
+    private void SetSelectedCounter(ISelectable selectedCounter)
     {
         this.selectedCounter = selectedCounter;
         OnSelectedVisualCounterChanged?.Invoke(this, new SelectedVisualCounterArgs
@@ -132,5 +136,13 @@ public class Player : MonoBehaviour
         });
     }
 
+    private void OnDrawGizmos()
+    {
+        var input = gameInput.GetPlayerInputNormalized();
+        var moveDir = new Vector3(input.x, 0f, input.y);
 
+        BetterGizmos.Raycast(Color.red, Color.blue, 3f, transform.position, transform.forward, 2f);
+        var pos = new Vector3(transform.position.x, 1f, transform.position.z);
+        BetterGizmos.DrawSphere(Color.green, pos, 2f);
+    }
 }

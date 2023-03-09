@@ -5,12 +5,13 @@ using UnityEngine;
 public class SelectCounter : MonoBehaviour
 {
 
-    private BaseCounter counter;
+    private ISelectable selectable;
+    private bool isShowing = false;
     [SerializeField] private GameObject[] visualsSelectedClearCounter;
 
     private void Awake()
     {
-        counter = GetComponentInParent<BaseCounter>();
+        selectable = GetComponentInParent<ISelectable>();
     }
 
     private void Start()
@@ -18,26 +19,36 @@ public class SelectCounter : MonoBehaviour
         Player.Instance.OnSelectedVisualCounterChanged += Player_OnSelectedVisualCounterChanged;
     }
 
-    private void Player_OnSelectedVisualCounterChanged(object sender, Player.SelectedVisualCounterArgs e)
+    private void Update()
     {
-        if (e.selectedCounter == counter)
-        {
-            Show();
-        } else
+        if (!isShowing)
         {
             Hide();
         }
     }
 
-    private void Show()
+    private void Player_OnSelectedVisualCounterChanged(object sender, Player.SelectedVisualCounterArgs e)
     {
-        foreach(GameObject visual in visualsSelectedClearCounter)
+        isShowing = true;
+        if (e.selectedCounter == selectable)
+        {
+            Show();
+        }
+        else
+        {
+            isShowing = false;
+        }
+    }
+
+    public void Show()
+    {
+        foreach (GameObject visual in visualsSelectedClearCounter)
         {
             visual.SetActive(true);
         }
     }
 
-    private void Hide()
+    public void Hide()
     {
         foreach (GameObject visual in visualsSelectedClearCounter)
         {

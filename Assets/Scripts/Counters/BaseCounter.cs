@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BaseCounter : MonoBehaviour, IPickUp
+public class BaseCounter : MonoBehaviour, IPickUp, ISelectable
 {
 
     [SerializeField] protected Transform counterTopPoint;

@@ -3,10 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [CreateAssetMenu()]
-public class KitchenSO : ScriptableObject
+public class DroppableKitchenSO : ScriptableObject
 {
     public Transform prefab;
     public string objectName;
     public Sprite sprite;
-    public Transform droppable;
 }
