@@ -7,7 +7,9 @@ public class ProgressBarUI : MonoBehaviour
 {
 
     [SerializeField] Image barImage;
-    [SerializeField] CuttingCounter counter;
+
+    [SerializeReference]
+    public ProgressBarCounter counter;
     [SerializeField] GameObject progressBarCanvas;
 
     private void Start()

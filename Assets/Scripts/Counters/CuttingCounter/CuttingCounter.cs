@@ -4,12 +4,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CuttingCounter : BaseCounter
+public class CuttingCounter : ProgressBarCounter
 {
 
     public event EventHandler OnCuttingItem;
-    public event EventHandler<float> OnShowProgressBar;
-    public event EventHandler OnHideProgressBar;
+    public override event EventHandler<float> OnShowProgressBar;
+    public override event EventHandler OnHideProgressBar;
 
     [SerializeField] private CuttingRecipesSO[] cuttingRecipesSO;
     private int cuttedTimes = 0;
