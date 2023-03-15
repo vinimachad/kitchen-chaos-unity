@@ -9,6 +9,10 @@ public class GameInput : MonoBehaviour
     public event EventHandler OnDropItem;
     public event EventHandler OnInteract;
     public event EventHandler<bool> OnHoldingUtilitiesInteract;
+
+    public Vector2 move;
+    [SerializeField] private bool isMobileInput;
+
     private PlayerInput playerInput;
 
     void Awake()
@@ -19,6 +23,14 @@ public class GameInput : MonoBehaviour
         playerInput.Player.UtilitiesInteract.performed += UtilitiesInteract_performed;
         playerInput.Player.UtilitiesInteract.canceled += UtilitiesInteract_canceled;
         playerInput.Player.DropItem.performed += DropItem_performed;
+    }
+
+    private void Update()
+    {
+        if (!isMobileInput)
+        {
+            SetMove(playerInput.Player.Move.ReadValue<Vector2>());
+        }
     }
 
     private void DropItem_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
@@ -41,9 +53,8 @@ public class GameInput : MonoBehaviour
         OnInteract?.Invoke(this, EventArgs.Empty);
     }
 
-    public Vector2 GetPlayerInputNormalized()
+    public void SetMove(Vector2 moveValue)
     {
-        Vector2 input = playerInput.Player.Move.ReadValue<Vector2>();
-        return input.normalized;
+        move = moveValue.normalized;
     }
 }

@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using MiniTools.BetterGizmos;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -20,7 +19,7 @@ public class PlayerMovement : MonoBehaviour
 
     void Update()
     {
-        this.input = gameInput.GetPlayerInputNormalized();
+        this.input = gameInput.move;
         Vector3 moveDir = new Vector3(input.x, gravity, input.y);
         characterController.Move(moveDir * speed * Time.deltaTime);
 

@@ -2,7 +2,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
-using MiniTools.BetterGizmos;
 
 public class Player : MonoBehaviour
 {
@@ -134,18 +133,5 @@ public class Player : MonoBehaviour
         {
             selectedCounter = selectedCounter
         });
-    }
-
-    private void OnDrawGizmos()
-    {
-        if (gameInput != null)
-        {
-            var input = gameInput.GetPlayerInputNormalized();
-            var moveDir = new Vector3(input.x, 0f, input.y);
-
-            BetterGizmos.Raycast(Color.red, Color.blue, 3f, transform.position, transform.forward, 2f);
-            var pos = new Vector3(transform.position.x, 1f, transform.position.z);
-            BetterGizmos.DrawSphere(Color.green, pos, 2f);
-        }
     }
 }

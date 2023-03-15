@@ -177,6 +177,17 @@
                 },
                 {
                     "name": "",
+                    "id": "9fdb3459-a22b-4a83-a58e-43bbe3cdbfbf",
+                    "path": "<Gamepad>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "6a3010d1-95f2-4253-a914-146da782bbe2",
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
@@ -188,8 +199,30 @@
                 },
                 {
                     "name": "",
+                    "id": "c9fe5822-59e3-4b1b-9c6b-a7c744d9a3a4",
+                    "path": "<Gamepad>/buttonWest",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UtilitiesInteract",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "02757967-6266-4dce-b9de-2a21c9d9c9ec",
                     "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "DropItem",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e2eb9d9e-1eaf-4b36-a76a-be2889d923b2",
+                    "path": "<Gamepad>/buttonWest",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
