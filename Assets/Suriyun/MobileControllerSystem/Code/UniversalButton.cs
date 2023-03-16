@@ -6,6 +6,7 @@ using UnityEngine.UI;
 using UnityEngine.EventSystems;
 using UnityEngine.Events;
 using TMPro;
+using System;
 
 namespace Suriyun.MCS
 {
@@ -65,13 +66,14 @@ namespace Suriyun.MCS
         public Color colorInactive;
         public Color colorPressed;
         #endregion
-        #region Events
+
+        #region Unity Events
         public int btnIndex;
-        public UnityEventInt onPointerDown;
-        public UnityEventInt onBeginDrag;
-        public UnityEventInt onDrag;
-        public UnityEventInt onPointerUp;
-        public UnityEventInt onEndDrag;
+        public UnityEvent<int> onPointerDown;
+        public UnityEvent<int> onBeginDrag;
+        public UnityEvent<int> onDrag;
+        public UnityEvent<int> onPointerUp;
+        public UnityEvent<int> onEndDrag;
         public UnityEvent<int> onActivateSkill;
         public UnityEvent<int> onCancelSkill;
         #endregion
@@ -141,7 +143,7 @@ namespace Suriyun.MCS
 
                 if (onPointerDown != null)
                 {
-                    onPointerDown.Invoke(btnIndex);
+                    onPointerDown?.Invoke(btnIndex);
                 }
             }
         }
@@ -161,12 +163,13 @@ namespace Suriyun.MCS
 
                 if (onBeginDrag != null)
                 {
-                    onBeginDrag.Invoke(btnIndex);
+                    onBeginDrag?.Invoke(btnIndex);
                 }
             }
         }
 
         protected bool canActivateSkill = false;
+
         public virtual void OnDrag(PointerEventData eventData)
         {
             if (isAimable
@@ -187,7 +190,7 @@ namespace Suriyun.MCS
 
                 if (onDrag != null)
                 {
-                    onDrag.Invoke(btnIndex);
+                    onDrag?.Invoke(btnIndex);
                 }
             }
         }
@@ -231,23 +234,21 @@ namespace Suriyun.MCS
                     }
                 }
 
-
-
                 state = ButtonState.Active;
                 this.UpdateButtonState();
                 if (canActivateSkill && onActivateSkill != null)
                 {
-
-                    onActivateSkill.Invoke(btnIndex);
+                    onActivateSkill?.Invoke(btnIndex);
                 }
+
                 else if (onCancelSkill != null)
                 {
-                    onCancelSkill.Invoke(btnIndex);
+                    onCancelSkill?.Invoke(btnIndex);
                 }
 
                 if (onPointerUp != null)
                 {
-                    onPointerUp.Invoke(btnIndex);
+                    onPointerUp?.Invoke(btnIndex);
                 }
 
                 this.UpdateColor();
@@ -267,7 +268,7 @@ namespace Suriyun.MCS
 
                 if (onEndDrag != null)
                 {
-                    onEndDrag.Invoke(btnIndex);
+                    onEndDrag?.Invoke(btnIndex);
                 }
             }
 
@@ -470,53 +471,53 @@ namespace Suriyun.MCS
             colorPressed = serializedObject.FindProperty("colorPressed");
         }
 
-        public override void OnInspectorGUI()
-        {
-            serializedObject.Update();
-            EditorGUILayout.TextArea("-----[ Config ]---------------", GUIStyle.none);
-            EditorGUILayout.PropertyField(debugLog);
-            EditorGUILayout.PropertyField(scaler);
-            EditorGUILayout.PropertyField(isAimable);
-            if (isAimable.boolValue)
-            {
-                EditorGUILayout.PropertyField(aimer);
-                EditorGUILayout.PropertyField(pointer);
-                EditorGUILayout.PropertyField(skillCanceller);
-                EditorGUILayout.PropertyField(deadzoneCurve);
-                EditorGUILayout.PropertyField(resetOutputValueOnRelease);
-            }
-            EditorGUILayout.PropertyField(text);
-            EditorGUILayout.PropertyField(btnIndex);
-            EditorGUILayout.TextArea("-----[ Parameters ]---------------", GUIStyle.none);
-            EditorGUILayout.PropertyField(isActive);
-            EditorGUILayout.PropertyField(isFingerDown);
-            EditorGUILayout.PropertyField(fingerId);
-            if (isAimable.boolValue)
-            {
-                EditorGUILayout.PropertyField(isManualAimOverride);
-                EditorGUILayout.PropertyField(direction);
-            }
-            EditorGUILayout.PropertyField(state);
-            EditorGUILayout.PropertyField(colorInactive);
-            EditorGUILayout.PropertyField(colorPressed);
-            EditorGUILayout.TextArea("-----[ Events ]---------------", GUIStyle.none);
-            showGameLogicEvents = EditorGUILayout.Toggle("showGameLogicEvents", showGameLogicEvents);
-            showRawButtonEvents = EditorGUILayout.Toggle("showRawButtonEvents", showRawButtonEvents);
-            if (showGameLogicEvents)
-            {
-                EditorGUILayout.PropertyField(onActivateSkill);
-                EditorGUILayout.PropertyField(onCancelSkill);
-            }
-            if (showRawButtonEvents)
-            {
-                EditorGUILayout.PropertyField(onPointerDown);
-                EditorGUILayout.PropertyField(onBeginDrag);
-                EditorGUILayout.PropertyField(onDrag);
-                EditorGUILayout.PropertyField(onPointerUp);
-                EditorGUILayout.PropertyField(onEndDrag);
-            }
-            serializedObject.ApplyModifiedProperties();
-        }
+        // public override void OnInspectorGUI()
+        // {
+        //     serializedObject.Update();
+        //     EditorGUILayout.TextArea("-----[ Config ]---------------", GUIStyle.none);
+        //     EditorGUILayout.PropertyField(debugLog);
+        //     EditorGUILayout.PropertyField(scaler);
+        //     EditorGUILayout.PropertyField(isAimable);
+        //     if (isAimable.boolValue)
+        //     {
+        //         EditorGUILayout.PropertyField(aimer);
+        //         EditorGUILayout.PropertyField(pointer);
+        //         EditorGUILayout.PropertyField(skillCanceller);
+        //         EditorGUILayout.PropertyField(deadzoneCurve);
+        //         EditorGUILayout.PropertyField(resetOutputValueOnRelease);
+        //     }
+        //     EditorGUILayout.PropertyField(text);
+        //     EditorGUILayout.PropertyField(btnIndex);
+        //     EditorGUILayout.TextArea("-----[ Parameters ]---------------", GUIStyle.none);
+        //     EditorGUILayout.PropertyField(isActive);
+        //     EditorGUILayout.PropertyField(isFingerDown);
+        //     EditorGUILayout.PropertyField(fingerId);
+        //     if (isAimable.boolValue)
+        //     {
+        //         EditorGUILayout.PropertyField(isManualAimOverride);
+        //         EditorGUILayout.PropertyField(direction);
+        //     }
+        //     EditorGUILayout.PropertyField(state);
+        //     EditorGUILayout.PropertyField(colorInactive);
+        //     EditorGUILayout.PropertyField(colorPressed);
+        //     EditorGUILayout.TextArea("-----[ Events ]---------------", GUIStyle.none);
+        //     showGameLogicEvents = EditorGUILayout.Toggle("showGameLogicEvents", showGameLogicEvents);
+        //     showRawButtonEvents = EditorGUILayout.Toggle("showRawButtonEvents", showRawButtonEvents);
+        //     if (showGameLogicEvents)
+        //     {
+        //         EditorGUILayout.PropertyField(onActivateSkill);
+        //         EditorGUILayout.PropertyField(onCancelSkill);
+        //     }
+        //     if (showRawButtonEvents)
+        //     {
+        //         EditorGUILayout.PropertyField(onPointerDown);
+        //         EditorGUILayout.PropertyField(onBeginDrag);
+        //         EditorGUILayout.PropertyField(onDrag);
+        //         EditorGUILayout.PropertyField(onPointerUp);
+        //         EditorGUILayout.PropertyField(onEndDrag);
+        //     }
+        //     serializedObject.ApplyModifiedProperties();
+        // }
     }
 #endif
 

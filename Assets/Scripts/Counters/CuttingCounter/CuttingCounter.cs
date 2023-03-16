@@ -10,6 +10,7 @@ public class CuttingCounter : ProgressBarCounter
     public event EventHandler OnCuttingItem;
     public override event EventHandler<float> OnShowProgressBar;
     public override event EventHandler OnHideProgressBar;
+    [SerializeField] private float waitToCutTime = .5f;
 
     [SerializeField] private CuttingRecipesSO[] cuttingRecipesSO;
     private int cuttedTimes = 0;
@@ -97,7 +98,8 @@ public class CuttingCounter : ProgressBarCounter
     {
         foreach (var value in Enumerable.Range(0, recipe.maxCutTime))
         {
-            yield return new WaitForSeconds(.5f);
+            yield return new WaitForSeconds(waitToCutTime);
+            print(cuttedTimes);
             cuttedTimes++;
             OnCuttingItem?.Invoke(this, EventArgs.Empty);
             float progressBarAmount = (float)cuttedTimes / recipe.maxCutTime;

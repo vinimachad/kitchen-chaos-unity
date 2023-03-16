@@ -4,6 +4,7 @@ using UnityEditor;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
+using System;
 
 namespace Suriyun.MCS
 {
@@ -17,6 +18,8 @@ namespace Suriyun.MCS
 
         public float innerRadius;
         public float pointerRadius;
+
+        public new event EventHandler<int> onPointerDown;
 
         protected override void Awake()
         {
@@ -86,7 +89,7 @@ namespace Suriyun.MCS
 
                 if (onPointerDown != null)
                 {
-                    onPointerDown.Invoke(btnIndex);
+                    onPointerDown?.Invoke(this, btnIndex);
                 }
             }
         }

@@ -33,6 +33,37 @@ public class GameInput : MonoBehaviour
         }
     }
 
+    #region  Mobile Input System
+
+    public void SetMove(Vector2 moveValue)
+    {
+        move = moveValue.normalized;
+    }
+
+    public void DropItem()
+    {
+        OnDropItem?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void StartUtilitiesInteract()
+    {
+        OnHoldingUtilitiesInteract?.Invoke(this, true);
+    }
+
+    public void CancelUtilitiesInteract()
+    {
+        OnHoldingUtilitiesInteract?.Invoke(this, false);
+    }
+
+    public void Interact()
+    {
+        OnInteract?.Invoke(this, EventArgs.Empty);
+    }
+
+    #endregion
+
+    #region New Unity Input System
+
     private void DropItem_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
         OnDropItem?.Invoke(this, EventArgs.Empty);
@@ -53,8 +84,5 @@ public class GameInput : MonoBehaviour
         OnInteract?.Invoke(this, EventArgs.Empty);
     }
 
-    public void SetMove(Vector2 moveValue)
-    {
-        move = moveValue.normalized;
-    }
+    #endregion
 }
