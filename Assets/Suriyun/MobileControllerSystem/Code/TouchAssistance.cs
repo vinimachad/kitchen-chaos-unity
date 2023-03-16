@@ -3,45 +3,25 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-namespace Suriyun.MCS {
+namespace Suriyun.MCS
+{
 
-    public class TouchAssistance : MonoBehaviour {
+    public class TouchAssistance : MonoBehaviour
+    {
         public BtnSetting btnMain;
         public BtnSetting btnSub1;
-        public BtnSetting btnSub2;
 
-        protected virtual void Start() {
+        protected virtual void Start()
+        {
             btnMain.Init();
             btnSub1.Init();
-            btnSub2.Init();
         }
 
-        protected virtual void Update() {
-            btnMain.Update();
-            btnSub1.Update();
-            btnSub2.Update();
-        }
 
-        public void MainBtnPressed() {
-            btnMain.ToFocusedScale();
-            btnSub1.ToUnfocusedScale();
-            btnSub2.ToUnfocusedScale();
-        }
-
-        public void SubBtn1Pressed() {
-            btnMain.ToUnfocusedScale();
-            btnSub1.ToFocusedScale();
-            btnSub2.ToUnfocusedScale();
-        }
-
-        public void SubBtn2Pressed() {
-            btnMain.ToUnfocusedScale();
-            btnSub1.ToUnfocusedScale();
-            btnSub2.ToFocusedScale();
-        }
 
         [Serializable]
-        public class BtnSetting {
+        public class BtnSetting
+        {
             public RectTransform btn;
             protected Vector3 refScale;
             public float focusedMultiplier = 1.2f;
@@ -49,20 +29,24 @@ namespace Suriyun.MCS {
             protected Vector3 toScale;
             public float scaleSpeed = 1.6f;
 
-            public void Init() {
+            public void Init()
+            {
                 refScale = btn.localScale;
                 toScale = refScale;
             }
 
-            public void Update() {
+            public void Update()
+            {
                 btn.localScale = Vector3.Lerp(btn.localScale, toScale, scaleSpeed * Time.deltaTime);
             }
 
-            public void ToFocusedScale() {
+            public void ToFocusedScale()
+            {
                 toScale = refScale * focusedMultiplier;
             }
 
-            public void ToUnfocusedScale() {
+            public void ToUnfocusedScale()
+            {
                 toScale = refScale * unfocusedMultiplier;
             }
 

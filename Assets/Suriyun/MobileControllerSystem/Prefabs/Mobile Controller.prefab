@@ -649,7 +649,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: dbe615202c0b44caea5c16f946cc4e59, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fa624494b60407641a399b89f18fbb3e, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -710,7 +710,7 @@ MonoBehaviour:
   onPointerDown:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9201587757374745550}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: 
         m_MethodName: MainBtnPressed
         m_Mode: 1
@@ -1318,7 +1318,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: dbe615202c0b44caea5c16f946cc4e59, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 84790ccbca8e54841998775f7a450ac4, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -1379,7 +1379,7 @@ MonoBehaviour:
   onPointerDown:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9201587757374745550}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: 
         m_MethodName: SubBtn2Pressed
         m_Mode: 1
@@ -1764,7 +1764,6 @@ GameObject:
   - component: {fileID: 9201587757374745522}
   - component: {fileID: 9201587757374745523}
   - component: {fileID: 9201587757374745551}
-  - component: {fileID: 9201587757374745550}
   m_Layer: 5
   m_Name: Mobile Controller
   m_TagString: Untagged
@@ -1992,33 +1991,6 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &9201587757374745550
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 9201587757374745524}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cd0f223e5e5274c7d93b4f1e81755a20, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  btnMain:
-    btn: {fileID: 9201587756658943497}
-    focusedMultiplier: 1
-    unfocusedMultiplier: 0.8
-    scaleSpeed: 16
-  btnSub1:
-    btn: {fileID: 9201587757571434158}
-    focusedMultiplier: 1.5
-    unfocusedMultiplier: 1
-    scaleSpeed: 16
-  btnSub2:
-    btn: {fileID: 9201587757146601989}
-    focusedMultiplier: 1.5
-    unfocusedMultiplier: 1
-    scaleSpeed: 16
 --- !u!1 &9201587757570855072
 GameObject:
   m_ObjectHideFlags: 0
@@ -2162,7 +2134,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: dbe615202c0b44caea5c16f946cc4e59, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5f98950db00c22c449f5ba9b43080ccf, type: 3}
   m_Type: 0
   m_PreserveAspect: 1
   m_FillCenter: 1
@@ -2223,7 +2195,7 @@ MonoBehaviour:
   onPointerDown:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 9201587757374745550}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: 
         m_MethodName: SubBtn1Pressed
         m_Mode: 1

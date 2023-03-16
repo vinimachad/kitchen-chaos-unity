@@ -272,8 +272,7 @@ namespace Suriyun.MCS
                 }
             }
 
-            rawDir = Vector3.zero;
-            UpdateDirection();
+            ResetOutputValue();
         }
 
         protected virtual void UpdateAiming(PointerEventData eventData)

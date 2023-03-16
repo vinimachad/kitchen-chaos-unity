@@ -9,6 +9,11 @@ public class KitchenObject : MonoBehaviour
 
     private IPickUp pickUp;
 
+    public KitchenObject(KitchenSO kitchenSO)
+    {
+        this.kitchenSO = kitchenSO;
+    }
+
     #region  CounterInteractionsRegion
     public KitchenSO GetKitchenObjectSO()
     {
