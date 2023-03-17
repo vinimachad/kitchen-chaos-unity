@@ -6,7 +6,7 @@ using UnityEngine;
 public class DroppableKitchenObject : MonoBehaviour, ISelectable
 {
 
-    [SerializeField] private KitchenObject kitchenObject;
+    [SerializeField] public KitchenObject kitchenObject;
 
     static public void SpawnDroppableKitchenObjectInPos(Transform pos, KitchenObject item)
     {

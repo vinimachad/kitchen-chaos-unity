@@ -1,5 +1,37 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2697491829069341572
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8496713215869083689}
+  m_Layer: 0
+  m_Name: TopPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8496713215869083689
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2697491829069341572}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.026, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 3498438357578248929}
+  m_Father: {fileID: 3283384306961249196}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &6545814892371954028
 GameObject:
   m_ObjectHideFlags: 0
@@ -9,7 +41,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3283384306961249196}
-  - component: {fileID: -7649225243902372529}
+  - component: {fileID: -820776560795642754}
   m_Layer: 0
   m_Name: Plate
   m_TagString: Untagged
@@ -30,10 +62,11 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7728300692778528785}
+  - {fileID: 8496713215869083689}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-7649225243902372529
+--- !u!114 &-820776560795642754
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -42,10 +75,111 @@ MonoBehaviour:
   m_GameObject: {fileID: 6545814892371954028}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8e50505c382d02040a9df89be6ddabd8, type: 3}
+  m_Script: {fileID: 11500000, guid: 54441d7c3750d1d429a4b659bd73c68b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   kitchenSO: {fileID: 11400000, guid: 8424eee7b92bad448b157f4a11639a26, type: 2}
+  validKitchenSOs:
+  - {fileID: 11400000, guid: ef110fa90647c0445aafdb32a34ec7ab, type: 2}
+  - {fileID: 11400000, guid: 6089ead35875fa043a5eeb6fe9745f0e, type: 2}
+  - {fileID: 11400000, guid: 5ae408a8cdc86b24b8f8d1123b0c18c1, type: 2}
+  - {fileID: 11400000, guid: f048ddd81eea6ab47a63d65d40b5362a, type: 2}
+  - {fileID: 11400000, guid: 3e62070fea95b114bb559234856ce631, type: 2}
+  completeVisuals:
+  - {fileID: 8422460732255913223}
+  plateTopPoint: {fileID: 8496713215869083689}
+--- !u!1001 &6110583770272878001
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 8496713215869083689}
+    m_Modifications:
+    - target: {fileID: 2319266917244438710, guid: 05e07b4150487fa40962052cba35f9b0,
+        type: 3}
+      propertyPath: plateKitchenObject
+      value: 
+      objectReference: {fileID: -820776560795642754}
+    - target: {fileID: 7224289158673252176, guid: 05e07b4150487fa40962052cba35f9b0,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7224289158673252176, guid: 05e07b4150487fa40962052cba35f9b0,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7224289158673252176, guid: 05e07b4150487fa40962052cba35f9b0,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7224289158673252176, guid: 05e07b4150487fa40962052cba35f9b0,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7224289158673252176, guid: 05e07b4150487fa40962052cba35f9b0,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7224289158673252176, guid: 05e07b4150487fa40962052cba35f9b0,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7224289158673252176, guid: 05e07b4150487fa40962052cba35f9b0,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7224289158673252176, guid: 05e07b4150487fa40962052cba35f9b0,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7224289158673252176, guid: 05e07b4150487fa40962052cba35f9b0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7224289158673252176, guid: 05e07b4150487fa40962052cba35f9b0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7224289158673252176, guid: 05e07b4150487fa40962052cba35f9b0,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7224289158673252177, guid: 05e07b4150487fa40962052cba35f9b0,
+        type: 3}
+      propertyPath: m_Name
+      value: HamburgerPlaceCompleteVisual
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 05e07b4150487fa40962052cba35f9b0, type: 3}
+--- !u!4 &3498438357578248929 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7224289158673252176, guid: 05e07b4150487fa40962052cba35f9b0,
+    type: 3}
+  m_PrefabInstance: {fileID: 6110583770272878001}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &8422460732255913223 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2319266917244438710, guid: 05e07b4150487fa40962052cba35f9b0,
+    type: 3}
+  m_PrefabInstance: {fileID: 6110583770272878001}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56f500c48bb88af4d803573289231870, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &6893462383038080657
 PrefabInstance:
   m_ObjectHideFlags: 0

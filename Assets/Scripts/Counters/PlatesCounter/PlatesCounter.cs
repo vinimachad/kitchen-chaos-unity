@@ -7,7 +7,7 @@ public class PlatesCounter : BaseCounter
 {
 
 
-    private List<KitchenObject> plates;
+    private List<PlateKitchenObject> plates;
     private int numberOfPlatesInCounter;
     [SerializeField] private int maxPlates;
     [SerializeField] private KitchenSO plateSO;
@@ -15,7 +15,7 @@ public class PlatesCounter : BaseCounter
     private void Start()
     {
         numberOfPlatesInCounter = maxPlates;
-        plates = new List<KitchenObject>();
+        plates = new List<PlateKitchenObject>();
 
         InstantiatePlatesInCounter();
     }
@@ -30,7 +30,6 @@ public class PlatesCounter : BaseCounter
             {
                 player.PickItem(Item);
                 numberOfPlatesInCounter--;
-                print(numberOfPlatesInCounter);
                 if (numberOfPlatesInCounter > 0)
                 {
                     SetItem(plates[numberOfPlatesInCounter - 1]);
@@ -49,9 +48,7 @@ public class PlatesCounter : BaseCounter
         {
             if (index == 0)
             {
-                Transform plateTransform = Instantiate(plateSO.prefab, counterTopPoint);
-                KitchenObject kitchenObjet = plateTransform.GetComponent<KitchenObject>();
-                plates.Add(kitchenObjet);
+                AddPlateInList();
             }
             else
             {
@@ -60,13 +57,31 @@ public class PlatesCounter : BaseCounter
                 float yPos = counterTopPointPosition.y + plateHeight * index;
                 Vector3 newPos = new Vector3(counterTopPointPosition.x, yPos, counterTopPointPosition.z);
 
-                Transform plateTransform = Instantiate(plateSO.prefab, newPos, counterTopPoint.rotation);
-                KitchenObject kitchenObjet = plateTransform.GetComponent<KitchenObject>();
-                plates.Add(kitchenObjet);
+                AddPlateInList(newPos);
             }
         }
 
         int plateIndex = maxPlates - 1;
         SetItem(plates[plateIndex]);
+    }
+
+    private void AddPlateInList(Vector3? pos = null)
+    {
+        Transform plateTransform = null;
+
+        if (pos != null)
+        {
+            plateTransform = Instantiate(plateSO.prefab, pos ?? Vector3.zero, counterTopPoint.rotation, counterTopPoint);
+        }
+        else
+        {
+            plateTransform = Instantiate(plateSO.prefab, counterTopPoint);
+        }
+
+        if (plateTransform != null)
+        {
+            PlateKitchenObject kitchenObjet = plateTransform.GetComponent<PlateKitchenObject>();
+            plates.Add(kitchenObjet);
+        }
     }
 }

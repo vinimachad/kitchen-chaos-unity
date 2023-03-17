@@ -43,4 +43,17 @@ public class BaseCounter : MonoBehaviour, IPickUp, ISelectable
     {
         this.Item = null;
     }
+
+    public virtual void CheckIfPlayerItemIsPlate(Player player)
+    {
+        PickItems playerPickedItem = player.GetPlayerPickedItem();
+        if (playerPickedItem.Item as PlateKitchenObject)
+        {
+            PlateKitchenObject plateKitchenObject = playerPickedItem.Item as PlateKitchenObject;
+            if (plateKitchenObject.TryAddKitchenObjetInPlate(Item))
+            {
+                Item.DestroyYourSelf();
+            }
+        }
+    }
 }

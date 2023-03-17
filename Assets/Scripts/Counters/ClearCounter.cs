@@ -7,16 +7,17 @@ public class ClearCounter : BaseCounter
 
     private Player player;
     private bool playerHasItem;
+    private PickItems playerItem;
 
     public override void Interact(Player player)
     {
 
         this.player = player;
-        PickItems playerItem = player.GetPlayerPickedItem();
+        playerItem = player.GetPlayerPickedItem();
         playerHasItem = playerItem.HasItem();
 
         if (HasItem())
-            PassItemToPlayer();
+            CheckIfIsPlate();
         else
             GrabbItemFromPlayer();
     }
@@ -29,14 +30,38 @@ public class ClearCounter : BaseCounter
 
     private void PassItemToPlayer()
     {
-        if (playerHasItem) return;
+        if (playerHasItem)
+            CheckIfPlayerItemIsPlate(player);
         else
             player.PickItem(Item);
+    }
+
+    private void CheckIfIsPlate()
+    {
+        if (Item.CheckIfItemIsPlateKitchenObject())
+            CheckIfItemWithPlayerIsRecipe();
+        else
+            PassItemToPlayer();
+    }
+
+    private void CheckIfItemWithPlayerIsRecipe()
+    {
+        if (playerHasItem)
+        {
+            PlateKitchenObject plateKitchenObject = Item as PlateKitchenObject;
+            if (plateKitchenObject.TryAddKitchenObjetInPlate(playerItem.Item))
+            {
+                playerItem.Item.DestroyYourSelf();
+            }
+        }
+        else
+        {
+            PassItemToPlayer();
+        }
     }
 
     public override void SetItem(KitchenObject item)
     {
         base.SetItem(item);
-
     }
 }

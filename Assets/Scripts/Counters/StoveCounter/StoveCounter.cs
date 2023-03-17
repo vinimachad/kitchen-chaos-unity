@@ -73,12 +73,20 @@ public class StoveCounter : ProgressBarCounter
                     state = State.Cooking;
                 }
             }
+            else
+            {
+                CheckIfPlayerItemIsPlate(player);
+            }
         }
         else
         {
             if (HasItem())
             {
                 player.PickItem(GetItem());
+            }
+            else
+            {
+                CheckIfPlayerItemIsPlate(player);
             }
         }
     }

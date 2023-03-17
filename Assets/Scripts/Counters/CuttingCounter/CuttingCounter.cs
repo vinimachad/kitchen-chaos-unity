@@ -19,7 +19,8 @@ public class CuttingCounter : ProgressBarCounter
     {
         if (player.GetPlayerPickedItem().HasItem())
         {
-            if (HasItem()) return;
+            if (HasItem())
+                CheckIfPlayerItemIsPlate(player);
 
             if (CheckIfCanCutItem(player.GetPlayerPickedItem().Item))
                 player.PlaceItemOn(this);
@@ -28,7 +29,6 @@ public class CuttingCounter : ProgressBarCounter
         {
             if (HasItem())
                 player.PickItem(Item);
-            else return;
         }
     }
 

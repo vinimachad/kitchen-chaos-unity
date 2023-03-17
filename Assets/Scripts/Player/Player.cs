@@ -45,7 +45,10 @@ public class Player : MonoBehaviour
     {
         if (playerPickedItem.HasItem())
         {
-            DroppableKitchenObject.SpawnDroppableKitchenObjectInPos(playerPickedItem.transform, playerPickedItem.GetItem());
+            KitchenObject playerItem = playerPickedItem.Item;
+
+            if (playerItem.GetKitchenObjectSO().droppable != null)
+                DroppableKitchenObject.SpawnDroppableKitchenObjectInPos(playerPickedItem.transform, playerItem);
         }
     }
 

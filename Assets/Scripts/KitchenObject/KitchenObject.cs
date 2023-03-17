@@ -5,14 +5,9 @@ using UnityEngine;
 public class KitchenObject : MonoBehaviour
 {
 
-    [SerializeField] private KitchenSO kitchenSO;
+    [SerializeField] public KitchenSO kitchenSO;
 
     private IPickUp pickUp;
-
-    public KitchenObject(KitchenSO kitchenSO)
-    {
-        this.kitchenSO = kitchenSO;
-    }
 
     #region  CounterInteractionsRegion
     public KitchenSO GetKitchenObjectSO()
@@ -49,6 +44,11 @@ public class KitchenObject : MonoBehaviour
     {
         Destroy(gameObject);
         ClearItem();
+    }
+
+    public bool CheckIfItemIsPlateKitchenObject()
+    {
+        return this as PlateKitchenObject;
     }
 
     static public KitchenObject InstantiateItemAndPassTo(Transform prefab, Transform counterTopPoint, IPickUp place)
