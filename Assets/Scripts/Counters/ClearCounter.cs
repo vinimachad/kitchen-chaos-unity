@@ -25,7 +25,23 @@ public class ClearCounter : BaseCounter
     private void GrabbItemFromPlayer()
     {
         if (playerHasItem)
+        {
             player.PlaceItemOn(this);
+            if (Item.CheckIfItemIsPlateKitchenObject())
+            {
+                CheckIfPlateAlreadyHasItem();
+            }
+        }
+    }
+    private void CheckIfIsPlate()
+    {
+        if (Item.CheckIfItemIsPlateKitchenObject())
+        {
+            CheckIfPlateAlreadyHasItem();
+            CheckIfItemWithPlayerIsRecipe();
+        }
+        else
+            PassItemToPlayer();
     }
 
     private void PassItemToPlayer()
@@ -36,12 +52,15 @@ public class ClearCounter : BaseCounter
             player.PickItem(Item);
     }
 
-    private void CheckIfIsPlate()
+
+    private void CheckIfPlateAlreadyHasItem()
     {
-        if (Item.CheckIfItemIsPlateKitchenObject())
-            CheckIfItemWithPlayerIsRecipe();
+        PlateKitchenObject plateKitchenObject = Item as PlateKitchenObject;
+
+        if (plateKitchenObject.HasItem())
+            plateKitchenObject.ShowRecipesUI();
         else
-            PassItemToPlayer();
+            plateKitchenObject.HideRecipesUI();
     }
 
     private void CheckIfItemWithPlayerIsRecipe()
@@ -52,6 +71,7 @@ public class ClearCounter : BaseCounter
             if (plateKitchenObject.TryAddKitchenObjetInPlate(playerItem.Item))
             {
                 playerItem.Item.DestroyYourSelf();
+                plateKitchenObject.ShowRecipesUI();
             }
         }
         else

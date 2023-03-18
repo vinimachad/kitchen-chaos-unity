@@ -11,8 +11,8 @@ public class ContainerCounter : BaseCounter
     public override void Interact(Player player)
     {
         bool playerHasItem = player.GetPlayerPickedItem().HasItem();
-        if (playerHasItem) 
-          return;
+        if (playerHasItem)
+            return;
         KitchenObject.InstantiateItemAndPassTo(
             kitchenScriptableObject.prefab,
             counterTopPoint,

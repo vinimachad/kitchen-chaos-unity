@@ -99,7 +99,6 @@ public class CuttingCounter : ProgressBarCounter
         foreach (var value in Enumerable.Range(0, recipe.maxCutTime))
         {
             yield return new WaitForSeconds(waitToCutTime);
-            print(cuttedTimes);
             cuttedTimes++;
             OnCuttingItem?.Invoke(this, EventArgs.Empty);
             float progressBarAmount = (float)cuttedTimes / recipe.maxCutTime;

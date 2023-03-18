@@ -52,6 +52,7 @@ public class BaseCounter : MonoBehaviour, IPickUp, ISelectable
             PlateKitchenObject plateKitchenObject = playerPickedItem.Item as PlateKitchenObject;
             if (plateKitchenObject.TryAddKitchenObjetInPlate(Item))
             {
+                plateKitchenObject.ShowRecipesUI();
                 Item.DestroyYourSelf();
             }
         }

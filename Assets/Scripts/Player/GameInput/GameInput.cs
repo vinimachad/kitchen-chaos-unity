@@ -71,12 +71,12 @@ public class GameInput : MonoBehaviour
 
     private void UtilitiesInteract_canceled(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        OnHoldingUtilitiesInteract?.Invoke(this, false);
+        // OnHoldingUtilitiesInteract?.Invoke(this, false);
     }
 
     private void UtilitiesInteract_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)
     {
-        OnHoldingUtilitiesInteract?.Invoke(this, true);
+        // OnHoldingUtilitiesInteract?.Invoke(this, true);
     }
 
     private void Interact_performed(UnityEngine.InputSystem.InputAction.CallbackContext obj)

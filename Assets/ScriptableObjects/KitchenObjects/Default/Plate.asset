@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15016e7931c52ce42984d814148ad5e0, type: 3}
   m_Name: Plate
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
-  objectName: 
-  sprite: {fileID: 0}
+  prefab: {fileID: 3283384306961249196, guid: b37f272dedf05aa428909ce0557b4bb3, type: 3}
+  objectName: Prato
+  sprite: {fileID: 21300000, guid: 3928afb5321bb3d489bbd4ac581b29a2, type: 3}
   droppable: {fileID: 0}

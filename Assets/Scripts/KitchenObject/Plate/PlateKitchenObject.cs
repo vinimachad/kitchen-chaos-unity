@@ -9,6 +9,8 @@ public class PlateKitchenObject : KitchenObject
     [SerializeField] private List<KitchenSO> validKitchenSOs;
     [SerializeField] private List<PlateCompleteVisual> completeVisuals;
     [SerializeField] private Transform plateTopPoint;
+    [SerializeField] private RecipesInPlateUI recipesInPlateUI;
+
     private List<KitchenSO> kitchenObjectsInPlate;
 
     public event EventHandler<KitchenSO> OnShowKitchenObjectInPlate;
@@ -36,6 +38,22 @@ public class PlateKitchenObject : KitchenObject
 
     private void ShowKitchenObjectInPlate(KitchenSO kitchenSO)
     {
+        recipesInPlateUI.AddIconInGridLayout(kitchenSO.sprite);
         OnShowKitchenObjectInPlate?.Invoke(this, kitchenSO);
+    }
+
+    public void ShowRecipesUI()
+    {
+        recipesInPlateUI.Show();
+    }
+
+    public void HideRecipesUI()
+    {
+        recipesInPlateUI.Hide();
+    }
+
+    public bool HasItem()
+    {
+        return kitchenObjectsInPlate.Count != 0;
     }
 }
